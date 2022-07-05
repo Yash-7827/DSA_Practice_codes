@@ -62,6 +62,9 @@ bool dequeue(struct myQueue* queue)
         queue->front++;
         std::cout<<queue->array[queue->front]<<" has been dequeued!\n";
         
+        if(queue->front>queue->rear)
+            queue->front = queue->rear = -1;
+        
         return true;
     }
 }
