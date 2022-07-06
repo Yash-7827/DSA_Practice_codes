@@ -22,7 +22,9 @@ class LinkedList{
     void insertAtStart(int element);
     void insertAtEnd(int element);
     void insertAtPos(int pos, int element);
+    void deleteNode(int element);
     void display();
+    
 };
 
 int LinkedList::calcSize()
@@ -101,6 +103,45 @@ void LinkedList::insertAtPos(int pos, int data) {
     }
 }
 
+void LinkedList::deleteNode(int element)
+{
+    node* temp= new node();
+    node* previous = new node();
+    temp=head;
+    
+    if(temp->next==NULL)
+    {
+        head==NULL;
+        delete(temp);
+        std::cout<<element<<" deleted\n";
+        
+        return;
+    }
+    
+    if(temp!=NULL&&temp->data==element)
+    {
+        head=temp->next;
+        delete(temp);
+        std::cout<<element<<" deleted\n";
+        return;
+    }
+    
+    while(temp!=NULL&&temp->data!=element)
+    {
+        previous=temp;
+        temp=temp->next;
+    }
+    
+    if(temp==NULL)
+    {
+        std::cout<<"Value not found in the list!\n";
+        return;
+    }
+    previous->next=temp->next;
+    delete(temp);
+    std::cout<<element<<" deleted\n";
+}
+
 void LinkedList::display(){
     node* temp = new node();
     
@@ -111,6 +152,7 @@ void LinkedList::display(){
         cout<<temp->data<<" ";
         temp=temp->next;
     }
+    std::cout<<"\n";
 }
 
 int main()
@@ -126,12 +168,17 @@ int main()
     myList -> insertAtEnd(18);
     myList -> insertAtEnd(11);
 
-    //Inserts after 3rd position
+    // Inserts after 3rd position
     myList -> insertAtPos(3, 25);
 
     /*No need for & i.e. address as we do not
     need to change head address
     */
+    myList -> display();
+    
+    myList -> deleteNode(12);
+    myList -> deleteNode(11);
+    
     myList -> display();
     return 0;
 }
