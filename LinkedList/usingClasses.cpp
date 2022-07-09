@@ -24,6 +24,7 @@ class LinkedList{
     void insertAtPos(int pos, int element);
     void deleteNode(int element);
     void display();
+    void deleteAtPos(int pos);
     
 };
 
@@ -142,6 +143,33 @@ void LinkedList::deleteNode(int element)
     std::cout<<element<<" deleted\n";
 }
 
+void LinkedList::deleteAtPos(int pos)
+{
+    node* temp = new node();
+    node* previous = new node();
+    temp=head;
+    
+    if(calcSize()<pos)
+        std::cout<<"Enter a valid position! (pos<"<<calcSize()<<"\n";
+     
+    if(pos==0)
+    {
+        head = temp->next;
+        cout<<temp->data<<" deleted\n";
+        delete(temp);
+        return;
+    }
+    
+    while(--pos)
+    {
+        previous=temp;
+        temp=temp->next;
+    }    
+    previous->next=temp->next;   
+    cout<<temp->data<<" deleted\n";
+    delete(temp);
+}
+
 void LinkedList::display(){
     node* temp = new node();
     
@@ -178,6 +206,9 @@ int main()
     
     myList -> deleteNode(12);
     myList -> deleteNode(11);
+    
+    myList -> deleteAtPos(3);
+    myList -> deleteAtPos(0);
     
     myList -> display();
     return 0;
